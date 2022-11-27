@@ -4,8 +4,6 @@ local RayfieldFolder = "Celestial"
 local ConfigurationFolder = RayfieldFolder.."/Configurations"
 local ConfigurationExtension = ".Celeste"
 
-
-
 local RayfieldLibrary = {
 	Flags = {},
 	Theme = {
