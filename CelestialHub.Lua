@@ -96,11 +96,11 @@ local LoadCelestialUI_Function = function(InGame_ID)
                 })
 
                 --- {Tabs} ---
-				local Main_Tab = MainUI_Window:CreateTab("Home", 4034483344)
-				local Client_Tab = MainUI_Window:CreateTab("Client", 470645116)
-				local Server_Tab = MainUI_Window:CreateTab("Server", 9432858523)
-				local Updates_Tab = MainUI_Window:CreateTab("Updates", 7546954294)
-				local Settings_Tab = MainUI_Window:CreateTab("Settings", 7059346373)
+				local Main_Tab = MainUI_Window:CreateTab("Home", 11706667269)
+				local Client_Tab = MainUI_Window:CreateTab("Client", 11706665411)
+				local Server_Tab = MainUI_Window:CreateTab("Server", 11706662744)
+				local Updates_Tab = MainUI_Window:CreateTab("Updates", 11706659382)
+				local Settings_Tab = MainUI_Window:CreateTab("Settings", 11706658067)
 
                 --- {Labels} ---
 				local GunGiver_Label = Server_Tab:CreateLabel("Guns | Giver")
@@ -224,7 +224,7 @@ local LoadCelestialUI_Function = function(InGame_ID)
                                 Title = "Celestial [V".. Celestial_Datas["Datas"]["UI_Infos"].Versions_Infos.Current_Version .." | Notification",
                                 Content = "Oops, The Gun: [".. Option .."], Seems To Arleady Be In Your Inventory.",
                                 Duration = 3.5,
-                                Image = 8990250029,
+                                Image = 11706650281,
 
                                 Actions = {
                                     Ignore = {
@@ -272,7 +272,7 @@ local LoadCelestialUI_Function = function(InGame_ID)
                                             Title = "Celestial [V".. Celestial_Datas["Datas"]["UI_Infos"].Versions_Infos.Current_Version .." | Notification",
                                             Content = "Oops, Looks Like You Doesn't Own The Required GamePass: [Riot Police Access], For [M4A1].",
                                             Duration = 3.5,
-                                            Image = 8990250029,
+                                            Image = 11706650281,
             
                                             Actions = {
                                                 Ignore = {
@@ -314,7 +314,7 @@ local LoadCelestialUI_Function = function(InGame_ID)
                                 Title = "Celestial [V".. Celestial_Datas["Datas"]["UI_Infos"].Versions_Infos.Current_Version .." | Notification",
                                 Content = "Oops, Looks Like You Doesn't Have This Gun: [".. Option .."], In Your Inventory.",
                                 Duration = 3.5,
-                                Image = 8990250029,
+                                Image = 11706650281,
 
                                 Actions = {
                                     Ignore = {
@@ -359,7 +359,7 @@ local LoadCelestialUI_Function = function(InGame_ID)
                                 Title = "Celestial [V".. Celestial_Datas["Datas"]["UI_Infos"].Versions_Infos.Current_Version .." | Notification",
                                 Content = "Oops, Looks Like The Gun: [".. Option .."], Is Arleady Moded.",
                                 Duration = 3.5,
-                                Image = 8990250029,
+                                Image = 11706650281,
 
                                 Actions = {
                                     Ignore = {
@@ -532,7 +532,7 @@ local LoadCelestialUI_Function = function(InGame_ID)
                                 Title = "Celestial [V".. Celestial_Datas["Datas"]["UI_Infos"].Versions_Infos.Current_Version .." | Notification",
                                 Content = "This Feature Has Successfully Been Disabled, With No Errors",
                                 Duration = 3.5,
-                                Image = 9754130800,
+                                Image = 11706675472,
     
                                 Actions = {
                                     Ignore = {
@@ -552,7 +552,7 @@ local LoadCelestialUI_Function = function(InGame_ID)
                     Name = "AntiOwner",
                     Info = "If The Game Owner Join, You Will Get Kicked If Enabled.",
                     CurrentValue = false,
-                    Flag = "AntiOwnerToggle_1",
+                    Flag = "AntiOwnerToggle_2",
                     
                     Callback = function(Value)
                         if (Value) then
@@ -560,7 +560,7 @@ local LoadCelestialUI_Function = function(InGame_ID)
                                 Title = "Celestial [V".. Celestial_Datas["Datas"]["UI_Infos"].Versions_Infos.Current_Version .." | Notification",
                                 Content = "Warning, This Feature Is Experimental. Doesn't Work? Contact Me Trough Discord!",
                                 Duration = 3.5,
-                                Image = 9754130800,
+                                Image = 11706689907,
 
                                 Actions = {
                                     Ignore = {
@@ -582,7 +582,7 @@ local LoadCelestialUI_Function = function(InGame_ID)
                                             Title = "Celestial [V".. Celestial_Datas["Datas"]["UI_Infos"].Versions_Infos.Current_Version .." | Notification",
                                             Content = "Warning, The Owner Of This Game Has Been Detected In Your Game, Were Preventing Bans+ Attemps, Kicking You Please Wait...",
                                             Duration = 3.5,
-                                            Image = 9754130800,
+                                            Image = 11706650281,
             
                                             Actions = {
                                                 Ignore = {
@@ -603,13 +603,64 @@ local LoadCelestialUI_Function = function(InGame_ID)
                                         end
                                     end
                                 end
+
+                                while Value do
+                                    Users_Service.PlayerAdded:Connect(PlayerJoined_Function)
+                                end
                             end
                         else
                             UILib_Url:Notify({
                                 Title = "Celestial [V".. Celestial_Datas["Datas"]["UI_Infos"].Versions_Infos.Current_Version .." | Notification",
                                 Content = "This Feature Has Successfully Been Disabled, With No Errors",
                                 Duration = 3.5,
-                                Image = 9754130800,
+                                Image = 11706675472,
+    
+                                Actions = {
+                                    Ignore = {
+                                        Name = "Alright!",
+    
+                                        Callback = function()
+                                            --- NOTHING ---
+                                        end
+                                    }
+                                }
+                            })
+                        end
+                    end,
+                })
+
+                local Toggle_3 = Settings_Tab:CreateToggle({
+                    Name = "SecureMode",
+                    Info = "If Enabled, Celestial Will Be Undetected (Invisible) To AntiCheats, UI Effects & Animations Will Be Reduced, Enabled By Defautl."
+                    CurrentValue = true,
+                    Flag = "SecureModeToggle_3",
+
+                    Callback = function(Value)
+                        if (Value) then
+                            loadstring(game:HttpGet("https://raw.githubusercontent.com/Celestial-Official/Celestial-HUB/main/UI_Library.Lua", true))()
+
+                            UILib_Url:Notify({
+                                Title = "Celestial [V".. Celestial_Datas["Datas"]["UI_Infos"].Versions_Infos.Current_Version .." | Notification",
+                                Content = "Warning, This Feature Is Experimental. Doesn't Work? Contact Me Trough Discord!",
+                                Duration = 3.5,
+                                Image = 11706689907,
+
+                                Actions = {
+                                    Ignore = {
+                                        Name = "Copy Discord",
+
+                                        Callback = function()
+                                            setclipboard("Celeste#3557")
+                                        end
+                                    }
+                                }
+                            })
+                        else
+                            UILib_Url:Notify({
+                                Title = "Celestial [V".. Celestial_Datas["Datas"]["UI_Infos"].Versions_Infos.Current_Version .." | Notification",
+                                Content = "This Feature Has Successfully Been Disabled, With No Errors",
+                                Duration = 3.5,
+                                Image = 11706675472,
     
                                 Actions = {
                                     Ignore = {
