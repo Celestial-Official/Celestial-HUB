@@ -1,16 +1,14 @@
-local Release = "Version 8 | BETA"
+local Release = "Version: 8.0 | BETA"
 local NotificationDuration = 6.5
 local RayfieldFolder = "Celestial"
 local ConfigurationFolder = RayfieldFolder.."/Configurations"
 local ConfigurationExtension = ".celeste"
 
-
-
 local RayfieldLibrary = {
 	Flags = {},
 	Theme = {
 		Default = {
-			TextFont = "Default", -- Default will use the various font faces used across Rayfield
+			TextFont = "Default",
 			TextColor = Color3.fromRGB(240, 240, 240),
 
 			Background = Color3.fromRGB(25, 25, 25),
@@ -28,9 +26,9 @@ local RayfieldLibrary = {
 
 			ElementBackground = Color3.fromRGB(35, 35, 35),
 			ElementBackgroundHover = Color3.fromRGB(40, 40, 40),
-			SecondaryElementBackground = Color3.fromRGB(25, 25, 25), -- For labels and paragraphs
+			SecondaryElementBackground = Color3.fromRGB(25, 25, 25),
 			ElementStroke = Color3.fromRGB(50, 50, 50),
-			SecondaryElementStroke = Color3.fromRGB(40, 40, 40), -- For labels and paragraphs
+			SecondaryElementStroke = Color3.fromRGB(40, 40, 40),
 
 			SliderBackground = Color3.fromRGB(43, 105, 159),
 			SliderProgress = Color3.fromRGB(43, 105, 159),
@@ -49,8 +47,8 @@ local RayfieldLibrary = {
 			PlaceholderColor = Color3.fromRGB(178, 178, 178)
 		},
 		Light = {
-			TextFont = "Gotham",  -- Default will use the various font faces used across Rayfield
-			TextColor = Color3.fromRGB(50, 50, 50), -- i need to make all text 240, 240, 240 and base gray on transparency not color to do this
+			TextFont = "Gotham",
+			TextColor = Color3.fromRGB(50, 50, 50),
 
 			Background = Color3.fromRGB(255, 255, 255),
 			Topbar = Color3.fromRGB(217, 217, 217),
@@ -67,9 +65,9 @@ local RayfieldLibrary = {
 
 			ElementBackground = Color3.fromRGB(198, 198, 198),
 			ElementBackgroundHover = Color3.fromRGB(230, 230, 230),
-			SecondaryElementBackground = Color3.fromRGB(136, 136, 136), -- For labels and paragraphs
+			SecondaryElementBackground = Color3.fromRGB(136, 136, 136),
 			ElementStroke = Color3.fromRGB(180, 199, 97),
-			SecondaryElementStroke = Color3.fromRGB(40, 40, 40),  --For labels and paragraphs
+			SecondaryElementStroke = Color3.fromRGB(40, 40, 40),
 
 			SliderBackground = Color3.fromRGB(31, 159, 71),
 			SliderProgress = Color3.fromRGB(31, 159, 71),
@@ -100,7 +98,7 @@ local CoreGui = game:GetService("CoreGui")
 local Rayfield =  game:GetObjects("rbxassetid://11637506633")[1]
 
 if gethui then
-	gethui()
+	Rayfield.Parent = gethui()
 elseif syn.protect_gui then 
 	syn.protect_gui(Rayfield)
 	Rayfield.Parent = CoreGui
@@ -126,8 +124,6 @@ else
 	end
 end
 
- --Object Variables
-
 local Camera = workspace.CurrentCamera
 local Main = Rayfield.Main
 local Topbar = Main.Topbar
@@ -140,9 +136,6 @@ local Prompt = Main.Prompt
 
 Rayfield.DisplayOrder = 100
 LoadingFrame.Version.Text = Release
-
-
- --Variables
 
 local request = (syn and syn.request) or (http and http.request) or http_request
 local CFileName = nil
@@ -239,7 +232,7 @@ local function LoadConfiguration(Configuration)
 				end    
 			end)
 		else
-			RayfieldLibrary:Notify({Title = "Flag Error", Content = "Celestial Wasn't Able To Find ["..FlagName.. "]."})
+			RayfieldLibrary:Notify({Title = "Flag Error", Content = "Celestial Was Unable To Find ["..FlagName.. "]."})
 		end
 	end)
 end
@@ -257,7 +250,7 @@ local function SaveConfiguration()
 	writefile(ConfigurationFolder .. "/" .. CFileName .. ConfigurationExtension, tostring(HttpService:JSONEncode(Data)))
 end
 
-local neon = (function()  --Open sourced neon module
+local neon = (function()
 	local module = {}
 
 	do
@@ -280,7 +273,6 @@ local neon = (function()  --Open sourced neon module
 			RootParent = nil
 		end
 	end
-
 
 	local binds = {}
 	local root = Instance.new('Folder', RootParent)
@@ -476,6 +468,7 @@ local neon = (function()  --Open sourced neon module
 
 	return module
 
+		
 end)()
 function ClosePrompt()
 	local PromptUI = Prompt.Prompt
@@ -538,7 +531,6 @@ function RayfieldLibrary:Notify(NotificationSettings)
 				NewAction.MouseButton1Click:Connect(function()
 					local Success, Response = pcall(Action.Callback)
 					if not Success then
-						print("Celestial | Action: ["..Action.Name.."], Callback Error [" ..tostring(Response).."].")
 					end
 					ActionCompleted = true
 				end)
@@ -574,9 +566,6 @@ function RayfieldLibrary:Notify(NotificationSettings)
 		TweenService:Create(Notification.Description, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 0.2}):Play()
 		wait(0.2)
 
-
-
-		-- Requires Graphics Level 8-10
 		if false == nil then
 			TweenService:Create(Notification, TweenInfo.new(0.3, Enum.EasingStyle.Quint), {BackgroundTransparency = 0.4}):Play()
 		else
@@ -644,7 +633,6 @@ end
 
 function Hide()
 	Debounce = true
-	RayfieldLibrary:Notify({Title = "Celestial Minimized", Content = "Celestial Has Been Minimized, You Can Maxisimize It By Pressing RightShift.", Duration = 7})
 	TweenService:Create(Main, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 470, 0, 400)}):Play()
 	TweenService:Create(Main.Topbar, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 470, 0, 45)}):Play()
 	TweenService:Create(Main, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {BackgroundTransparency = 1}):Play()
@@ -946,10 +934,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 	LoadingFrame.Subtitle.TextTransparency = 1
 	Main.Shadow.Image.ImageTransparency = 1
 	LoadingFrame.Version.TextTransparency = 1
-	LoadingFrame.Title.Text = Settings.LoadingTitle or "Celestial"
+	LoadingFrame.Title.Text = Settings.LoadingTitle or "Celeste Interface Suite"
 	LoadingFrame.Subtitle.Text = Settings.LoadingSubtitle or "By Celeste#3557"
-	if Settings.LoadingTitle ~= "Celestial" then
-		LoadingFrame.Version.Text = "Celeste UI"
+	if Settings.LoadingTitle ~= "Celeste Interface Suite" then
+		LoadingFrame.Version.Text = "Celestial UI"
 	end
 	Topbar.Visible = false
 	Elements.Visible = false
@@ -1010,8 +998,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 				})
 			end
 
-			if Settings.Discord.RememberJoins then -- We do logic this way so if the developer changes this setting, the user still won't be prompted, only new users
-				writefile(RayfieldFolder.."/Discord Invites".."/"..Settings.Discord.Invite..ConfigurationExtension,"Celestial >> Remember_Join: True")
+			if Settings.Discord.RememberJoins then
+				writefile(RayfieldFolder.."/Discord Invites".."/"..Settings.Discord.Invite..ConfigurationExtension")
 			end
 		else
 
@@ -1033,12 +1021,11 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Settings.KeySettings.Key = game:HttpGet(Settings.KeySettings.Key)
 			end)
 			if not Success then
-				print("Celestial | ["..Settings.KeySettings.Key.."], Error [" ..tostring(Response).."].")
 			end
 		end
 
 		if not Settings.KeySettings.FileName then
-			Settings.KeySettings.FileName = "No File Name Was Specified"
+			Settings.KeySettings.FileName = "No File Name Specified"
 		end
 
 		if isfile(RayfieldFolder.."/Key System".."/"..Settings.KeySettings.FileName..ConfigurationExtension) then
@@ -1050,7 +1037,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		if not Passthrough then
 			local AttemptsRemaining = math.random(2,6)
 			Rayfield.Enabled = false
-			local KeyUI = game:GetObjects("rbxassetid://11380036235")[1]
+			local KeyUI = game:GetObjects("rbxassetid://11695805160")[1]
 			KeyUI.Enabled = true
 			if gethui then
 				KeyUI.Parent = gethui()
@@ -1136,7 +1123,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 						if writefile then
 							writefile(RayfieldFolder.."/Key System".."/"..Settings.KeySettings.FileName..ConfigurationExtension, Settings.KeySettings.Key)
 						end
-						RayfieldLibrary:Notify({Title = "Celestial | Key-System", Content = "Successfully Saved Your Login Key."})
+						RayfieldLibrary:Notify({Title = "Key System", Content = "Your Key Has Successfully Been Saved."})
 					end
 				else
 					if AttemptsRemaining == 0 then
@@ -1241,7 +1228,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 		TabButton.Visible = true
 
-		 --Create Elements Page
 		local TabPage = Elements.Template:Clone()
 		TabPage.Name = Name
 		TabPage.Visible = true
@@ -1265,7 +1251,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 			TabButton.Shadow.Visible = false
 		end
 		TabButton.UIStroke.Color = SelectedTheme.TabStroke
-		 --Animate
 		wait(0.1)
 		if FirstTab then
 			TabButton.BackgroundColor3 = SelectedTheme.TabBackground
@@ -1323,7 +1308,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 		local Tab = {}
 
-		-- Button
 		function Tab:CreateButton(ButtonSettings)
 			local ButtonValue = {}
 
@@ -1376,7 +1360,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(Button.ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 1}):Play()
 					TweenService:Create(Button.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 1}):Play()
 					Button.Title.Text = "Callback Error"
-					print("Celestial | ["..ButtonSettings.Name.."], Callback Error [" ..tostring(Response).."].")
+					print("Rayfield | "..ButtonSettings.Name.." Callback Error " ..tostring(Response))
 					wait(0.5)
 					Button.Title.Text = ButtonSettings.Name
 					TweenService:Create(Button, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -1413,7 +1397,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 			return ButtonValue
 		end
 
-		-- Section
 		function Tab:CreateSection(SectionName)
 
 			local SectionValue = {}
@@ -1441,7 +1424,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 			return SectionValue
 		end
 
-		-- Label
 		function Tab:CreateLabel(LabelText)
 			local LabelValue = {}
 
@@ -1479,7 +1461,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Paragraph.Parent = TabPage
 
 			Paragraph.Content.Size = UDim2.new(0, 438, 0, Paragraph.Content.TextBounds.Y)
-			--Paragraph.Content.Position = UDim2.new(1, -10, 0,76)
 			Paragraph.Size = UDim2.new(1, -10, 0, Paragraph.Content.TextBounds.Y + 40)
 
 			Paragraph.BackgroundTransparency = 1
@@ -1503,7 +1484,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 			return ParagraphValue
 		end
 
-		-- Input
 		function Tab:CreateInput(InputSettings)
 			local Input = Elements.Template.Input:Clone()
 			Input.Name = InputSettings.Name
@@ -1569,7 +1549,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(Input, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 					TweenService:Create(Input.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 1}):Play()
 					Input.Title.Text = "Callback Error"
-					print("Celestial | ["..InputSettings.Name.."], Callback Error [" ..tostring(Response).."].")
 					wait(0.5)
 					Input.Title.Text = InputSettings.Name
 					TweenService:Create(Input, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -1720,7 +1699,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 							DropdownSettings.Callback(Option)
 						end)
 						if not Success then
-							print("Celestial | ["..DropdownSettings.Name.."], Callback Error [" ..tostring(Response).."].")
 						end
 						DropdownSettings.CurrentOption = Option
 						for _, droption in ipairs(Dropdown.List:GetChildren()) do
@@ -1776,7 +1754,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 					TweenService:Create(Dropdown.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 1}):Play()
 					Dropdown.Title.Text = "Callback Error"
-					print("Celestial | ["..DropdownSettings.Name.."], Callback Error [" ..tostring(Response).."].")
 					wait(0.5)
 					Dropdown.Title.Text = DropdownSettings.Name
 					TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -1811,7 +1788,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 					if Dropdown.List:FindFirstChild(Item) then
 						Dropdown.List[Item]:Destroy()
 					else
-						Error('Option Not Found.')
 					end
 				else
 					Error("No")
@@ -1921,7 +1897,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 							TweenService:Create(Keybind, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 							TweenService:Create(Keybind.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 1}):Play()
 							Keybind.Title.Text = "Callback Error"
-							print("Celestial | ["..KeybindSettings.Name.."], Callback Error [" ..tostring(Response).."].")
 							wait(0.5)
 							Keybind.Title.Text = KeybindSettings.Name
 							TweenService:Create(Keybind, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -1932,10 +1907,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 						if Held then
 							local Loop; Loop = RunService.Stepped:Connect(function()
 								if not Held then
-									KeybindSettings.Callback(false) -- maybe pcall this
+									KeybindSettings.Callback(false)
 									Loop:Disconnect()
 								else
-									KeybindSettings.Callback(true) -- maybe pcall this
+									KeybindSettings.Callback(true)
 								end
 							end)	
 						end
@@ -2069,7 +2044,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 1}):Play()
 					Toggle.Title.Text = "Callback Error"
-					print("Celestial | ["..ToggleSettings.Name.."], Callback Error [" ..tostring(Response).."].")
 					wait(0.5)
 					Toggle.Title.Text = ToggleSettings.Name
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -2116,7 +2090,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 					TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 1}):Play()
 					Toggle.Title.Text = "Callback Error"
-					print("Celestial | ["..ToggleSettings.Name.."], Callback Error [" ..tostring(Response).."].")
 					wait(0.5)
 					Toggle.Title.Text = ToggleSettings.Name
 					TweenService:Create(Toggle, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -2134,7 +2107,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 			return ToggleSettings
 		end
 		
-		 --Colorpicker
 		function Tab:CreateColorpicker(ColorSettings)
 			local ColorPicker = Elements.Template.Color:Clone()
 			ColorPicker.Name = ColorSettings.Name
@@ -2352,7 +2324,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 								TweenService:Create(Slider, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 								TweenService:Create(Slider.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 1}):Play()
 								Slider.Title.Text = "Callback Error"
-								print("Celestial | ["..SliderSettings.Name.."], Callback Error [" ..tostring(Response).."].")
 								wait(0.5)
 								Slider.Title.Text = SliderSettings.Name
 								TweenService:Create(Slider, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -2379,7 +2350,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(Slider, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 					TweenService:Create(Slider.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 1}):Play()
 					Slider.Title.Text = "Callback Error"
-					print("Celestial | ["..SliderSettings.Name.."], Callback Error [" ..tostring(Response).."].")
 					wait(0.5)
 					Slider.Title.Text = SliderSettings.Name
 					TweenService:Create(Slider, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -2460,14 +2430,13 @@ function RayfieldLibrary:CreateWindow(Settings)
 						clicked = true
 						if not Success then
 							ClosePrompt()
-							print("Celestial | ["..info.Name.."], Callback Error [" ..tostring(Response).."].")
 						else
 							ClosePrompt()
 						end
 					end
 				end)
 				Button.Name = name
-				Button.Parent = PromptUI.Buttons -- saving memory
+				Button.Parent = PromptUI.Buttons
 				Button.Size = UDim2.fromOffset(Button.TextLabel.TextBounds.X + 24, 30)
 			end
 		end
@@ -2491,8 +2460,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 				end
 			end
 		else
-			--TweenService:Create(PromptUI.Buttons.Middle.UIStroke,TweenInfo.new(0.3, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
-			--TweenService:Create(PromptUI.Buttons.Middle.TextLabel,TweenInfo.new(0.3, Enum.EasingStyle.Quint), {TextTransparency = 0}):Play()
 		end
 	end
 	
@@ -2568,13 +2535,12 @@ for _, TopbarButton in ipairs(Topbar:GetChildren()) do
 	end
 end
 
-
 function RayfieldLibrary:LoadConfiguration()
 	if CEnabled then
 		pcall(function()
 			if isfile(ConfigurationFolder .. "/" .. CFileName .. ConfigurationExtension) then
 				LoadConfiguration(readfile(ConfigurationFolder .. "/" .. CFileName .. ConfigurationExtension))
-				RayfieldLibrary:Notify({Title = "Celestial | Configuration", Content = "The Configuration File Has Successfully Been Loaded!"})
+				RayfieldLibrary:Notify({Title = "Configuration Loaded", Content = "The configuration file for this script has been loaded from a previous session"})
 			end
 		end)
 	end
