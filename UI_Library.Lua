@@ -180,7 +180,7 @@ function ChangeTheme(ThemeName)
 
 end
 function ColorDragger()
-	
+
 end
 local function AddDraggingFunctionality(DragPoint, Main)
 	pcall(function()
@@ -996,7 +996,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			end
 
 			if Settings.Discord.RememberJoins then
-				writefile(RayfieldFolder.."/Discord Invites".."/"..Settings.Discord.Invite..ConfigurationExtension")
+				writefile(RayfieldFolder.."/Discord Invites".."/"..Settings.Discord.Invite..ConfigurationExtension)
 			end
 		else
 
@@ -1322,7 +1322,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			TweenService:Create(Button, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}):Play()
 			TweenService:Create(Button.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
 			TweenService:Create(Button.Title, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {TextTransparency = 0}):Play()	
-			
+
 			if ButtonSettings.Info then
 				Button.Description.Text = ButtonSettings.Info
 				local IsHover = false
@@ -1487,7 +1487,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Input.Title.Text = InputSettings.Name
 			Input.Visible = true
 			Input.Parent = TabPage
-			
+
 
 			Input.BackgroundTransparency = 1
 			Input.UIStroke.Transparency = 1
@@ -1502,7 +1502,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			Input.InputFrame.InputBox.PlaceholderText = InputSettings.PlaceholderText
 			Input.InputFrame.Size = UDim2.new(0, Input.InputFrame.InputBox.TextBounds.X + 24, 0, 30)
-			
+
 			if InputSettings.Info then
 				Input.Description.Text = InputSettings.Info
 				local IsHover = false
@@ -1529,14 +1529,14 @@ function RayfieldLibrary:CreateWindow(Settings)
 					end
 				end)
 			end
-			
+
 			if InputSettings.NumbersOnly or InputSettings.CharacterLimit then
 				Input.InputFrame.InputBox:GetPropertyChangedSignal('Text'):Connect(function()
 					if InputSettings.CharacterLimit then Input.InputFrame.InputBox.Text = Input.InputFrame.InputBox.Text:sub(1,InputSettings.CharacterLimit) end
 					if InputSettings.NumbersOnly then Input.InputFrame.InputBox.Text = Input.InputFrame.InputBox.Text:gsub('%D+', '') end
 				end)
 			end
-			
+
 			Input.InputFrame.InputBox.FocusLost:Connect(function(enter)
 				if InputSettings.OnEnter and not enter then if InputSettings.RemoveTextAfterFocusLost then Input.InputFrame.InputBox.Text = "" end return end
 				local Success, Response = pcall(function()
@@ -1639,7 +1639,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					end
 				end
 			end)
-			
+
 			Dropdown.List[',---S=()earch'].Input:GetPropertyChangedSignal('Text'):Connect(function()
 				local InputText=string.upper(Dropdown.List[',---S=()earch'].Input.Text)
 				for _,item in ipairs(Dropdown.List:GetChildren()) do
@@ -1661,7 +1661,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Dropdown.MouseLeave:Connect(function()
 				TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
 			end)
-			
+
 			local function Error(text)
 				TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(85, 0, 0)}):Play()
 				TweenService:Create(Dropdown.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 1}):Play()
@@ -1671,7 +1671,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
 				TweenService:Create(Dropdown.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
 			end
-			
+
 			local function AddOption(Option,Selected)
 				local DropdownOption = Elements.Template.Dropdown.List.Template:Clone()
 				DropdownOption.Name = Option
@@ -1816,7 +1816,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			TweenService:Create(Keybind, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}):Play()
 			TweenService:Create(Keybind.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
 			TweenService:Create(Keybind.Title, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {TextTransparency = 0}):Play()	
-			
+
 			if KeybindSettings.Info then
 				Keybind.Description.Text = KeybindSettings.Info
 				local IsHover = false
@@ -1843,7 +1843,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					end
 				end)
 			end
-			
+
 			Keybind.KeybindFrame.KeybindBox.Text = KeybindSettings.CurrentKeybind
 			Keybind.KeybindFrame.Size = UDim2.new(0, Keybind.KeybindFrame.KeybindBox.TextBounds.X + 24, 0, 30)
 
@@ -1955,7 +1955,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			TweenService:Create(Toggle, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}):Play()
 			TweenService:Create(Toggle.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
 			TweenService:Create(Toggle.Title, TweenInfo.new(0.7, Enum.EasingStyle.Quint), {TextTransparency = 0}):Play()	
-			
+
 			if ToggleSettings.Info then
 				Toggle.Description.Text = ToggleSettings.Info
 				local IsHover = false
@@ -1982,7 +1982,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					end
 				end)
 			end
-			
+
 			if not ToggleSettings.CurrentValue then
 				Toggle.Switch.Indicator.Position = UDim2.new(1, -40, 0.5, 0)
 				Toggle.Switch.Indicator.UIStroke.Color = SelectedTheme.ToggleDisabledStroke
@@ -2103,7 +2103,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			return ToggleSettings
 		end
-		
+
 		function Tab:CreateColorpicker(ColorSettings)
 			local ColorPicker = Elements.Template.Color:Clone()
 			ColorPicker.Name = ColorSettings.Name
@@ -2113,7 +2113,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			local Current = ColorSettings.CurrentColor
 			local main = ColorPicker.Main
 			local hue, saturation, value = ColorSettings.CurrentColor:ToHSV()
-			
+
 			local function inbounds(position, range, offset)
 				local left = offset
 				local right = offset + range
@@ -2123,11 +2123,11 @@ function RayfieldLibrary:CreateWindow(Settings)
 				elseif position + left > right - 3 then
 					position = right - 3
 				end
-				
+
 				position = offset + position
 				return position, -(left + range * 0.5 - position)
 			end
-			
+
 			local hueposition, huerelposition = inbounds(main.Hue.Selector.AbsoluteSize.X * hue, main.Hue.Selector.AbsoluteSize.X, main.Hue.Selector.AbsolutePosition.X)
 			local satposition, satrelposition = inbounds(main.Hue.Selector.AbsoluteSize.X * saturation, main.Hue.Selector.AbsoluteSize.X, main.Hue.Selector.AbsolutePosition.X)
 			local valposition, valrelposition = inbounds(main.Hue.Selector.AbsoluteSize.X * value, main.Hue.Selector.AbsoluteSize.X, main.Hue.Selector.AbsolutePosition.X)
@@ -2199,7 +2199,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			end)
 		end
 
-		 --Slider
+		--Slider
 		function Tab:CreateSlider(SliderSettings)
 			local Dragging = false
 			local Slider = Elements.Template.Slider:Clone()
@@ -2363,7 +2363,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 			return SliderSettings
 		end
 
-
 		return Tab
 	end
 
@@ -2413,10 +2412,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 		PromptUI.Buttons.Template.Visible = false
 		PromptUI.Buttons.Template.TextLabel.TextTransparency = 1
 		PromptUI.Buttons.Template.UIStroke.Transparency = 1
-		
+
 		PromptUI.Content.Text = PromptSettings.Content
 		PromptUI.Sub.Text = PromptSettings.SubTitle or ''
-		
+
 		if PromptSettings.Actions then
 			for name,info in pairs(PromptSettings.Actions) do
 				local Button = PromptUI.Buttons.Template:Clone()
@@ -2437,7 +2436,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				Button.Size = UDim2.fromOffset(Button.TextLabel.TextBounds.X + 24, 30)
 			end
 		end
-		
+
 		TweenService:Create(Prompt, TweenInfo.new(0.3, Enum.EasingStyle.Quint), {BackgroundTransparency = .5}):Play()
 		wait(.2)
 		TweenService:Create(PromptUI, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {BackgroundTransparency = 0,Size = UDim2.new(0,350,0,150)}):Play()
@@ -2459,7 +2458,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		else
 		end
 	end
-	
+
 	return Window
 end
 
@@ -2470,17 +2469,20 @@ end
 
 Topbar.ChangeSize.MouseButton1Click:Connect(function()
 	if Debounce then return end
+
 	if Minimised then
 		Minimised = false
 		Maximise()
 	else
 		if not SearchHided then SearchHided = true spawn(CloseSearch)  end
+
 		Minimised = true
 		Minimise()
 	end
 end)
 Topbar.Search.MouseButton1Click:Connect(function()
 	if Debounce or Minimised then return end
+
 	if SearchHided then
 		OpenSearch()
 		SearchHided = false
