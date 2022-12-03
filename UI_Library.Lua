@@ -465,10 +465,7 @@ local neon = (function()
 		return binds[frame] and binds[frame].parts
 	end
 
-
-	return module
-
-		
+	return module	
 end)()
 function ClosePrompt()
 	local PromptUI = Prompt.Prompt
@@ -1314,7 +1311,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			local Button = Elements.Template.Button:Clone()
 			Button.Name = ButtonSettings.Name
 			Button.Title.Text = ButtonSettings.Name
-			Button.ElementIndicator.Text = ButtonSettings.Interact or 'Button'
+			Button.ElementIndicator.Text = ButtonSettings.Interact or "Button"
 			Button.Visible = true
 			Button.Parent = TabPage
 
