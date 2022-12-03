@@ -1,39 +1,34 @@
-local Release = "Version: 8.0 | BETA"
-local NotificationDuration = 6.5
+local Release = "Version: 9 | BETA"
+local NotificationDuration = 4.5
 local RayfieldFolder = "Celestial"
 local ConfigurationFolder = RayfieldFolder.."/Configurations"
 local ConfigurationExtension = ".celeste"
 
 local RayfieldLibrary = {
 	Flags = {},
+
 	Theme = {
 		Default = {
 			TextFont = "Default",
 			TextColor = Color3.fromRGB(240, 240, 240),
-
 			Background = Color3.fromRGB(25, 25, 25),
 			Topbar = Color3.fromRGB(34, 34, 34),
 			Shadow = Color3.fromRGB(20, 20, 20),
-
 			NotificationBackground = Color3.fromRGB(20, 20, 20),
 			NotificationActionsBackground = Color3.fromRGB(230, 230, 230),
-
 			TabBackground = Color3.fromRGB(80, 80, 80),
 			TabStroke = Color3.fromRGB(85, 85, 85),
 			TabBackgroundSelected = Color3.fromRGB(210, 210, 210),
 			TabTextColor = Color3.fromRGB(240, 240, 240),
 			SelectedTabTextColor = Color3.fromRGB(50, 50, 50),
-
 			ElementBackground = Color3.fromRGB(35, 35, 35),
 			ElementBackgroundHover = Color3.fromRGB(40, 40, 40),
 			SecondaryElementBackground = Color3.fromRGB(25, 25, 25),
 			ElementStroke = Color3.fromRGB(50, 50, 50),
 			SecondaryElementStroke = Color3.fromRGB(40, 40, 40),
-
 			SliderBackground = Color3.fromRGB(43, 105, 159),
 			SliderProgress = Color3.fromRGB(43, 105, 159),
 			SliderStroke = Color3.fromRGB(48, 119, 177),
-
 			ToggleBackground = Color3.fromRGB(30, 30, 30),
 			ToggleEnabled = Color3.fromRGB(0, 146, 214),
 			ToggleDisabled = Color3.fromRGB(100, 100, 100),
@@ -41,38 +36,32 @@ local RayfieldLibrary = {
 			ToggleDisabledStroke = Color3.fromRGB(125, 125, 125),
 			ToggleEnabledOuterStroke = Color3.fromRGB(100, 100, 100),
 			ToggleDisabledOuterStroke = Color3.fromRGB(65, 65, 65),
-
 			InputBackground = Color3.fromRGB(30, 30, 30),
 			InputStroke = Color3.fromRGB(65, 65, 65),
 			PlaceholderColor = Color3.fromRGB(178, 178, 178)
 		},
-		Light = {
-			TextFont = "Gotham",
-			TextColor = Color3.fromRGB(50, 50, 50),
 
+		Light = {
+			TextFont = "Gotham", 
+			TextColor = Color3.fromRGB(50, 50, 50),
 			Background = Color3.fromRGB(255, 255, 255),
 			Topbar = Color3.fromRGB(217, 217, 217),
 			Shadow = Color3.fromRGB(223, 223, 223),
-
 			NotificationBackground = Color3.fromRGB(20, 20, 20),
 			NotificationActionsBackground = Color3.fromRGB(230, 230, 230),
-
 			TabBackground = Color3.fromRGB(220, 220, 220),
 			TabStroke = Color3.fromRGB(112, 112, 112),
 			TabBackgroundSelected = Color3.fromRGB(0, 142, 208),
 			TabTextColor = Color3.fromRGB(240, 240, 240),
 			SelectedTabTextColor = Color3.fromRGB(50, 50, 50),
-
 			ElementBackground = Color3.fromRGB(198, 198, 198),
 			ElementBackgroundHover = Color3.fromRGB(230, 230, 230),
 			SecondaryElementBackground = Color3.fromRGB(136, 136, 136),
 			ElementStroke = Color3.fromRGB(180, 199, 97),
 			SecondaryElementStroke = Color3.fromRGB(40, 40, 40),
-
 			SliderBackground = Color3.fromRGB(31, 159, 71),
 			SliderProgress = Color3.fromRGB(31, 159, 71),
 			SliderStroke = Color3.fromRGB(42, 216, 94),
-
 			ToggleBackground = Color3.fromRGB(170, 203, 60),
 			ToggleEnabled = Color3.fromRGB(32, 214, 29),
 			ToggleDisabled = Color3.fromRGB(100, 22, 23),
@@ -80,7 +69,6 @@ local RayfieldLibrary = {
 			ToggleDisabledStroke = Color3.fromRGB(65, 8, 8),
 			ToggleEnabledOuterStroke = Color3.fromRGB(0, 170, 0),
 			ToggleDisabledOuterStroke = Color3.fromRGB(170, 0, 0),
-
 			InputBackground = Color3.fromRGB(31, 159, 71),
 			InputStroke = Color3.fromRGB(19, 65, 31),
 			PlaceholderColor = Color3.fromRGB(178, 178, 178)
@@ -146,8 +134,7 @@ local Debounce = false
 local clicked = false
 local SearchHided = true
 local Notifications = Rayfield.Notifications
-
-local SelectedTheme = RayfieldLibrary.Theme.Default
+local SelectedTheme = RayfieldLibrary.Theme.Light
 
 function ChangeTheme(ThemeName)
 	SelectedTheme = RayfieldLibrary.Theme[ThemeName]
@@ -179,12 +166,13 @@ function ChangeTheme(ThemeName)
 	end
 
 end
-function ColorDragger()
 
-end
+function ColorDragger() end
+
 local function AddDraggingFunctionality(DragPoint, Main)
 	pcall(function()
 		local Dragging, DragInput, MousePos, FramePos = false,false,false,false
+
 		DragPoint.InputBegan:Connect(function(Input)
 			if Input.UserInputType == Enum.UserInputType.MouseButton1 then
 				Dragging = true
@@ -198,14 +186,17 @@ local function AddDraggingFunctionality(DragPoint, Main)
 				end)
 			end
 		end)
+
 		DragPoint.InputChanged:Connect(function(Input)
 			if Input.UserInputType == Enum.UserInputType.MouseMovement then
 				DragInput = Input
 			end
 		end)
+
 		UserInputService.InputChanged:Connect(function(Input)
 			if Input == DragInput and Dragging then
 				local Delta = Input.Position - MousePos
+
 				TweenService:Create(Main, TweenInfo.new(0.45, Enum.EasingStyle.Quint, Enum.EasingDirection.Out), {Position  = UDim2.new(FramePos.X.Scale,FramePos.X.Offset + Delta.X, FramePos.Y.Scale, FramePos.Y.Offset + Delta.Y)}):Play()
 			end
 		end)
@@ -222,6 +213,7 @@ end
 
 local function LoadConfiguration(Configuration)
 	local Data = HttpService:JSONDecode(Configuration)
+
 	table.foreach(Data, function(FlagName, FlagValue)
 		if RayfieldLibrary.Flags[FlagName] then
 			spawn(function() 
@@ -232,7 +224,7 @@ local function LoadConfiguration(Configuration)
 				end    
 			end)
 		else
-			RayfieldLibrary:Notify({Title = "Flag Error", Content = "Celestial Was Unable To Find ["..FlagName.. "]."})
+			RayfieldLibrary:Notify({Title = "Flag Error", Content = "Celestial Couldn't Find [" ..FlagName.. "]"})
 		end
 	end)
 end
@@ -240,6 +232,7 @@ end
 local function SaveConfiguration()
 	if not CEnabled then return end
 	local Data = {}
+
 	for i,v in pairs(RayfieldLibrary.Flags) do
 		if v.Type == "Colorpicker" then
 			Data[i] = PackColor(v.CurrentValue)
@@ -247,6 +240,7 @@ local function SaveConfiguration()
 			Data[i] = v.CurrentValue or v.CurrentKeybind or v.CurrentOption
 		end
 	end	
+
 	writefile(ConfigurationFolder .. "/" .. CFileName .. ConfigurationExtension, tostring(HttpService:JSONEncode(Data)))
 end
 
@@ -257,13 +251,17 @@ local neon = (function()
 		local function IsNotNaN(x)
 			return x == x
 		end
+
 		local continued = IsNotNaN(Camera:ScreenPointToRay(0,0).Origin.x)
+
 		while not continued do
 			RunService.RenderStepped:wait()
 			continued = IsNotNaN(Camera:ScreenPointToRay(0,0).Origin.x)
 		end
 	end
+
 	local RootParent = Camera
+
 	if false == nil then
 		RootParent = Camera
 	else
@@ -278,9 +276,9 @@ local neon = (function()
 	local root = Instance.new('Folder', RootParent)
 	root.Name = 'neon'
 
-
 	local GenUid; do
 		local id = 0
+
 		function GenUid()
 			id = id + 1
 			return 'neon::'..tostring(id)
@@ -297,6 +295,7 @@ local neon = (function()
 			local s3 = (v3 - v1).magnitude
 			local smax = max(s1, s2, s3)
 			local A, B, C
+
 			if s1 == smax then
 				A, B, C = v1, v2, v3
 			elseif s2 == smax then
@@ -308,20 +307,16 @@ local neon = (function()
 			local para = ( (B-A).x*(C-A).x + (B-A).y*(C-A).y + (B-A).z*(C-A).z ) / (A-B).magnitude
 			local perp = sqrt((C-A).magnitude^2 - para*para)
 			local dif_para = (A - B).magnitude - para
-
 			local st = CFrame.new(B, A)
 			local za = CFrame.Angles(pi/2,0,0)
-
 			local cf0 = st
-
 			local Top_Look = (cf0 * za).lookVector
 			local Mid_Point = A + CFrame.new(A, B).LookVector * para
 			local Needed_Look = CFrame.new(Mid_Point, C).LookVector
 			local dot = Top_Look.x*Needed_Look.x + Top_Look.y*Needed_Look.y + Top_Look.z*Needed_Look.z
-
 			local ac = CFrame.Angles(0, 0, acos(dot))
-
 			cf0 = cf0 * ac
+
 			if ((cf0 * za).lookVector - Needed_Look).magnitude > 0.01 then
 				cf0 = cf0 * CFrame.Angles(0, 0, -2*acos(dot))
 			end
@@ -465,7 +460,10 @@ local neon = (function()
 		return binds[frame] and binds[frame].parts
 	end
 
-	return module	
+
+	return module
+
+
 end)()
 function ClosePrompt()
 	local PromptUI = Prompt.Prompt
@@ -630,6 +628,7 @@ end
 
 function Hide()
 	Debounce = true
+	RayfieldLibrary:Notify({Title = "Interface Hidden", Content = "The interface has been hidden, you can unhide the interface by tapping RightShift", Duration = 7})
 	TweenService:Create(Main, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 470, 0, 400)}):Play()
 	TweenService:Create(Main.Topbar, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 470, 0, 45)}):Play()
 	TweenService:Create(Main, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {BackgroundTransparency = 1}):Play()
@@ -863,7 +862,6 @@ function Maximise()
 		end
 	end
 
-
 	wait(0.5)
 	Debounce = false
 end
@@ -931,10 +929,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 	LoadingFrame.Subtitle.TextTransparency = 1
 	Main.Shadow.Image.ImageTransparency = 1
 	LoadingFrame.Version.TextTransparency = 1
-	LoadingFrame.Title.Text = Settings.LoadingTitle or "Celeste Interface Suite"
-	LoadingFrame.Subtitle.Text = Settings.LoadingSubtitle or "By Celeste#3557"
-	if Settings.LoadingTitle ~= "Celeste Interface Suite" then
-		LoadingFrame.Version.Text = "Celestial UI"
+	LoadingFrame.Title.Text = Settings.LoadingTitle or "Celestial Interface Suite"
+	LoadingFrame.Subtitle.Text = Settings.LoadingSubtitle or "By: </> Celeste#3557 & Xamenia#2020"
+	if Settings.LoadingTitle ~= "Celestial Interface Suite" then
+		LoadingFrame.Version.Text = "Celeste UI"
 	end
 	Topbar.Visible = false
 	Elements.Visible = false
@@ -996,7 +994,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			end
 
 			if Settings.Discord.RememberJoins then
-				writefile(RayfieldFolder.."/Discord Invites".."/"..Settings.Discord.Invite..ConfigurationExtension)
+				writefile(RayfieldFolder.."/Discord Invites".."/"..Settings.Discord.Invite..ConfigurationExtension,"Celestial RememberJoins is true for this invite, this invite will not ask you to join again")
 			end
 		else
 
@@ -1022,7 +1020,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		end
 
 		if not Settings.KeySettings.FileName then
-			Settings.KeySettings.FileName = "No File Name Specified"
+			Settings.KeySettings.FileName = "No file name specified"
 		end
 
 		if isfile(RayfieldFolder.."/Key System".."/"..Settings.KeySettings.FileName..ConfigurationExtension) then
@@ -1120,7 +1118,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 						if writefile then
 							writefile(RayfieldFolder.."/Key System".."/"..Settings.KeySettings.FileName..ConfigurationExtension, Settings.KeySettings.Key)
 						end
-						RayfieldLibrary:Notify({Title = "Key System", Content = "Your Key Has Successfully Been Saved."})
+						RayfieldLibrary:Notify({Title = "Key System", Content = "The key for this script has been saved successfully"})
 					end
 				else
 					if AttemptsRemaining == 0 then
@@ -1225,6 +1223,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 		TabButton.Visible = true
 
+		--Create Elements Page
 		local TabPage = Elements.Template:Clone()
 		TabPage.Name = Name
 		TabPage.Visible = true
@@ -1248,6 +1247,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			TabButton.Shadow.Visible = false
 		end
 		TabButton.UIStroke.Color = SelectedTheme.TabStroke
+		--Animate
 		wait(0.1)
 		if FirstTab then
 			TabButton.BackgroundColor3 = SelectedTheme.TabBackground
@@ -1305,13 +1305,14 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 		local Tab = {}
 
+		-- Button
 		function Tab:CreateButton(ButtonSettings)
 			local ButtonValue = {}
 
 			local Button = Elements.Template.Button:Clone()
 			Button.Name = ButtonSettings.Name
 			Button.Title.Text = ButtonSettings.Name
-			Button.ElementIndicator.Text = ButtonSettings.Interact or "Button"
+			Button.ElementIndicator.Text = ButtonSettings.Interact or 'button'
 			Button.Visible = true
 			Button.Parent = TabPage
 
@@ -1357,7 +1358,6 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(Button.ElementIndicator, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {TextTransparency = 1}):Play()
 					TweenService:Create(Button.UIStroke, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Transparency = 1}):Play()
 					Button.Title.Text = "Callback Error"
-					print("Rayfield | "..ButtonSettings.Name.." Callback Error " ..tostring(Response))
 					wait(0.5)
 					Button.Title.Text = ButtonSettings.Name
 					TweenService:Create(Button, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
@@ -1394,6 +1394,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			return ButtonValue
 		end
 
+		-- Section
 		function Tab:CreateSection(SectionName)
 
 			local SectionValue = {}
@@ -1421,6 +1422,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			return SectionValue
 		end
 
+		-- Label
 		function Tab:CreateLabel(LabelText)
 			local LabelValue = {}
 
@@ -1458,6 +1460,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			Paragraph.Parent = TabPage
 
 			Paragraph.Content.Size = UDim2.new(0, 438, 0, Paragraph.Content.TextBounds.Y)
+			--Paragraph.Content.Position = UDim2.new(1, -10, 0,76)
 			Paragraph.Size = UDim2.new(1, -10, 0, Paragraph.Content.TextBounds.Y + 40)
 
 			Paragraph.BackgroundTransparency = 1
@@ -1481,6 +1484,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			return ParagraphValue
 		end
 
+		-- Input
 		function Tab:CreateInput(InputSettings)
 			local Input = Elements.Template.Input:Clone()
 			Input.Name = InputSettings.Name
@@ -1785,6 +1789,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					if Dropdown.List:FindFirstChild(Item) then
 						Dropdown.List[Item]:Destroy()
 					else
+						Error('Option not found.')
 					end
 				else
 					Error("No")
@@ -1904,10 +1909,10 @@ function RayfieldLibrary:CreateWindow(Settings)
 						if Held then
 							local Loop; Loop = RunService.Stepped:Connect(function()
 								if not Held then
-									KeybindSettings.Callback(false)
+									KeybindSettings.Callback(false) -- maybe pcall this
 									Loop:Disconnect()
 								else
-									KeybindSettings.Callback(true)
+									KeybindSettings.Callback(true) -- maybe pcall this
 								end
 							end)	
 						end
@@ -2104,6 +2109,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			return ToggleSettings
 		end
 
+		--Colorpicker
 		function Tab:CreateColorpicker(ColorSettings)
 			local ColorPicker = Elements.Template.Color:Clone()
 			ColorPicker.Name = ColorSettings.Name
@@ -2363,6 +2369,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			return SliderSettings
 		end
 
+
 		return Tab
 	end
 
@@ -2412,6 +2419,9 @@ function RayfieldLibrary:CreateWindow(Settings)
 		PromptUI.Buttons.Template.Visible = false
 		PromptUI.Buttons.Template.TextLabel.TextTransparency = 1
 		PromptUI.Buttons.Template.UIStroke.Transparency = 1
+		--PromptUI.Buttons.Middle.Visible = false
+		--PromptUI.Buttons.Middle.TextLabel.TextTransparency = 1
+		--PromptUI.Buttons.Middle.UIStroke.Transparency = 1
 
 		PromptUI.Content.Text = PromptSettings.Content
 		PromptUI.Sub.Text = PromptSettings.SubTitle or ''
@@ -2456,6 +2466,8 @@ function RayfieldLibrary:CreateWindow(Settings)
 				end
 			end
 		else
+			--TweenService:Create(PromptUI.Buttons.Middle.UIStroke,TweenInfo.new(0.3, Enum.EasingStyle.Quint), {Transparency = 0}):Play()
+			--TweenService:Create(PromptUI.Buttons.Middle.TextLabel,TweenInfo.new(0.3, Enum.EasingStyle.Quint), {TextTransparency = 0}):Play()
 		end
 	end
 
@@ -2469,20 +2481,17 @@ end
 
 Topbar.ChangeSize.MouseButton1Click:Connect(function()
 	if Debounce then return end
-
 	if Minimised then
 		Minimised = false
 		Maximise()
 	else
 		if not SearchHided then SearchHided = true spawn(CloseSearch)  end
-
 		Minimised = true
 		Minimise()
 	end
 end)
 Topbar.Search.MouseButton1Click:Connect(function()
 	if Debounce or Minimised then return end
-
 	if SearchHided then
 		OpenSearch()
 		SearchHided = false
@@ -2534,12 +2543,13 @@ for _, TopbarButton in ipairs(Topbar:GetChildren()) do
 	end
 end
 
+
 function RayfieldLibrary:LoadConfiguration()
 	if CEnabled then
 		pcall(function()
 			if isfile(ConfigurationFolder .. "/" .. CFileName .. ConfigurationExtension) then
 				LoadConfiguration(readfile(ConfigurationFolder .. "/" .. CFileName .. ConfigurationExtension))
-				RayfieldLibrary:Notify({Title = "Configuration Loaded", Content = "The configuration file for this script has been loaded from a previous session"})
+				RayfieldLibrary:Notify({Title = "Configuration Loaded", Content = "The Configuration File Has Successfully Been Saved."})
 			end
 		end)
 	end
