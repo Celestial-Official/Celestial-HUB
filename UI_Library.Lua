@@ -134,7 +134,7 @@ local Debounce = false
 local clicked = false
 local SearchHided = true
 local Notifications = Rayfield.Notifications
-local SelectedTheme = RayfieldLibrary.Theme.Light
+local SelectedTheme = RayfieldLibrary.Theme.Default
 
 function ChangeTheme(ThemeName)
 	SelectedTheme = RayfieldLibrary.Theme[ThemeName]
